@@ -2,10 +2,10 @@
   "name": "slack-text",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "lint:fix": "npm run lint -- --fix"
   },
   "private": true,
   "dependencies": {
