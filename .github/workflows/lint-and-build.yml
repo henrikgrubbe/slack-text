@@ -1,0 +1,45 @@
+name: Lint and build
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    name: Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: current
+          cache: npm
+
+      - name: Dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+  build:
+    name: Building
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: current
+          cache: npm
+
+      - name: Dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
