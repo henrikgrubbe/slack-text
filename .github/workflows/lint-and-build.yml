@@ -13,16 +13,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Node
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: current
           cache: pnpm
 
-      - name: Dependencies
+      - name: Install dependencies
         run: pnpm i --frozen-lockfile
 
-      - name: Lint
+      - name: Lint Angular app
         run: pnpm run lint
 
   build:
@@ -32,14 +35,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Node
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: current
           cache: pnpm
 
-      - name: Dependencies
+      - name: Install dependencies
         run: pnpm i --frozen-lockfile
 
-      - name: Build
+      - name: Build Angular app
         run: pnpm run build
