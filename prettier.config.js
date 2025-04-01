@@ -14,4 +14,5 @@ module.exports = {
       },
     },
   ],
+  endOfLine: "auto"
 };
