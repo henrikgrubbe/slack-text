@@ -1,72 +1,114 @@
 import { Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { NgClass, NgOptimizedImage } from '@angular/common';
 
-type ColorChoice = 'all' | Color;
+type ColorScheme = 'yellow' | 'white' | 'mix1' | 'mix2';
 type Color = 'yellow' | 'white';
+
+interface MappedCharacter {
+  character: string;
+  icons: string[];
+}
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  imports: [FormsModule],
+  imports: [FormsModule, NgOptimizedImage, NgClass],
 })
 export class AppComponent {
+  protected readonly COLOR_SCHEMES: Record<ColorScheme, { colors: Color[] }> = {
+    yellow: { colors: ['yellow'] },
+    white: { colors: ['white'] },
+    mix1: {
+      colors: ['yellow', 'white'],
+    },
+    mix2: {
+      colors: ['white', 'yellow'],
+    },
+  };
+
   private readonly COLOR_PATTERN = 'col';
-  private readonly CHARACTER_MAP = new Map<string, string>([
+  private readonly ICON_MAP = new Map<string, string[]>([
     ...'abcdefghijklmnopqrstuvwxyz'
       .split('')
-      .map((char): [string, string] => [
+      .map((char): [string, string[]] => [
         char,
-        `:alphabet-${this.COLOR_PATTERN}-${char}:`,
+        [`alphabet-${this.COLOR_PATTERN}-${char}`],
       ]),
     [
       'æ',
-      `:alphabet-${this.COLOR_PATTERN}-a::alphabet-${this.COLOR_PATTERN}-e:`,
+      [`alphabet-${this.COLOR_PATTERN}-a`, `alphabet-${this.COLOR_PATTERN}-e`],
     ],
     [
       'ø',
-      `:alphabet-${this.COLOR_PATTERN}-o::alphabet-${this.COLOR_PATTERN}-e:`,
+      [`alphabet-${this.COLOR_PATTERN}-o`, `alphabet-${this.COLOR_PATTERN}-e`],
     ],
     [
       'å',
-      `:alphabet-${this.COLOR_PATTERN}-a::alphabet-${this.COLOR_PATTERN}-a:`,
+      [`alphabet-${this.COLOR_PATTERN}-a`, `alphabet-${this.COLOR_PATTERN}-a`],
     ],
-    ['@', `:alphabet-${this.COLOR_PATTERN}-at:`],
-    ['#', `:alphabet-${this.COLOR_PATTERN}-hash:`],
-    ['?', `:alphabet-${this.COLOR_PATTERN}-question:`],
-    ['!', `:alphabet-${this.COLOR_PATTERN}-exclamation:`],
-    [' ', ':transparent-square:'],
+    ['@', [`alphabet-${this.COLOR_PATTERN}-at`]],
+    ['#', [`alphabet-${this.COLOR_PATTERN}-hash`]],
+    ['?', [`alphabet-${this.COLOR_PATTERN}-question`]],
+    ['!', [`alphabet-${this.COLOR_PATTERN}-exclamation`]],
   ]);
 
-  protected readonly colorChoice = signal<ColorChoice>('all');
-  protected readonly colors = computed(() =>
-    this.colorChoice() === 'all' ? ['yellow', 'white'] : [this.colorChoice()],
-  );
-
+  protected readonly selectedColorScheme = signal<ColorScheme>('yellow');
   protected readonly inputText = signal('');
-  protected readonly outputText = computed(() =>
-    this.createSlackText(this.inputText()),
+
+  protected readonly outputIcons = computed(() =>
+    this.iconList(this.inputText()),
   );
 
-  private createSlackText(text: string) {
-    const colors = this.colors();
+  protected readonly outputText = computed(() =>
+    this.iconList(this.inputText())
+      .flatMap((mappedCharacter: MappedCharacter) =>
+        mappedCharacter.icons.length === 0
+          ? mappedCharacter.character === ' '
+            ? '    '
+            : mappedCharacter.character
+          : mappedCharacter.icons.map((icon) => `:${icon}:`),
+      )
+      .join(''),
+  );
+
+  private iconList(text: string): MappedCharacter[] {
+    const colors = this.COLOR_SCHEMES[this.selectedColorScheme()].colors;
 
     return text
       .split('')
       .map((char) => ({
         char,
-        mappedChar: this.CHARACTER_MAP.get(char.toLowerCase()),
+        icons: this.ICON_MAP.get(char.toLowerCase()),
       }))
       .reduce(
-        ({ result, colorIndex }, { char, mappedChar }) => ({
-          result: `${result}${mappedChar?.replaceAll(this.COLOR_PATTERN, colors[colorIndex]) ?? char}`,
+        ({ result, colorIndex }, { char, icons }) => ({
+          result: [
+            ...result,
+            {
+              character: char,
+              icons:
+                icons?.map((icon) =>
+                  icon.replaceAll(this.COLOR_PATTERN, colors[colorIndex]),
+                ) ?? [],
+            },
+          ],
           colorIndex:
-            (mappedChar?.includes(this.COLOR_PATTERN) ?? false)
+            (icons?.some((icon) => icon.includes(this.COLOR_PATTERN)) ?? false)
               ? colorIndex === colors.length - 1
                 ? 0
                 : colorIndex + 1
               : colorIndex,
         }),
-        { result: '', colorIndex: 0 },
+        { result: [] as MappedCharacter[], colorIndex: 0 },
       ).result;
+  }
+
+  protected copy() {
+    void navigator.clipboard.writeText(this.outputText());
+  }
+
+  protected setColorScheme(key: ColorScheme) {
+    this.selectedColorScheme.set(key);
   }
 }
