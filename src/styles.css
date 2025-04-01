@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: Inter, system-ui, sans-serif;
+  --default-font-feature-settings: 'cv11';
+
+  --color-slack-yellow: oklch(0.786 0.172 68.607);
+  --color-slack-red: oklch(0.417 0.124 352.952);
+  --color-slack-white: oklch(0.979 0 89.876);
+  --color-slack-blue-dark: oklch(0.367 0.155 268.089);
+  --color-slack-blue-light: oklch(0.768 0.13 223.201);
+}
