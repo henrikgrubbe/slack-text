@@ -1,98 +1,97 @@
-<div class="flex h-[100vh] w-full items-center justify-center">
-  <div class="flex flex-col items-center gap-8">
-    <textarea
-      [(ngModel)]="inputText"
-      class="color-gray-900 min-h-16 w-96 rounded-md p-2 px-3 py-1.5 outline outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
-      placeholder="Type here"
-      rows="4"
-    ></textarea>
+<div class="mt-8 flex flex-col gap-4 md:gap-8">
+  <textarea
+    [(ngModel)]="inputText"
+    class="color-gray-900 min-h-16 w-96 self-center rounded-md p-2 px-3 py-1.5 outline outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+    placeholder="Type here"
+    rows="4"
+    maxlength="256"
+  ></textarea>
 
-    <div class="flex flex-col items-center gap-2">
-      <div class="text-md font-semibold">Color scheme</div>
-      <div class="flex items-center gap-3" role="radiogroup">
+  <div class="flex flex-col items-center gap-2">
+    <div class="text-md font-semibold">Color scheme</div>
+    <div class="flex items-center gap-3" role="radiogroup">
+      <span
+        (click)="setColorScheme('yellow')"
+        [attr.aria-checked]="selectedColorScheme() === 'yellow'"
+        [ngClass]="{
+          'outline-2': selectedColorScheme() === 'yellow',
+        }"
+        class="outline-slack-blue-light/80 hover:outline-slack-blue-light/50 active:outline-slack-blue-light flex cursor-pointer rounded-full p-0.5 hover:outline-2 active:outline-2"
+        role="radio"
+      >
         <span
-          (click)="setColorScheme('yellow')"
-          [attr.aria-checked]="selectedColorScheme() === 'yellow'"
-          [ngClass]="{
-            'outline-2': selectedColorScheme() === 'yellow',
-          }"
-          class="outline-slack-blue-light/80 hover:outline-slack-blue-light/50 active:outline-slack-blue-light flex cursor-pointer rounded-full p-0.5 hover:outline-2 active:outline-2"
-          role="radio"
-        >
-          <span
-            aria-hidden="true"
-            class="from-slack-yellow to-slack-red size-8 rounded-full bg-linear-to-br from-30%"
-          ></span>
-        </span>
+          aria-hidden="true"
+          class="from-slack-yellow to-slack-red size-8 rounded-full bg-linear-to-br from-30%"
+        ></span>
+      </span>
 
+      <span
+        (click)="setColorScheme('white')"
+        [attr.aria-checked]="selectedColorScheme() === 'white'"
+        [ngClass]="{
+          'outline-2': selectedColorScheme() === 'white',
+        }"
+        class="outline-slack-yellow/80 hover:outline-slack-yellow/50 active:outline-slack-yellow flex cursor-pointer rounded-full p-0.5 hover:outline-2 active:outline-2"
+        role="radio"
+      >
         <span
-          (click)="setColorScheme('white')"
-          [attr.aria-checked]="selectedColorScheme() === 'white'"
-          [ngClass]="{
-            'outline-2': selectedColorScheme() === 'white',
-          }"
-          class="outline-slack-yellow/80 hover:outline-slack-yellow/50 active:outline-slack-yellow flex cursor-pointer rounded-full p-0.5 hover:outline-2 active:outline-2"
-          role="radio"
-        >
-          <span
-            aria-hidden="true"
-            class="from-slack-white to-slack-blue-dark size-8 rounded-full bg-linear-to-br from-30% to-80%"
-          ></span>
-        </span>
+          aria-hidden="true"
+          class="from-slack-white to-slack-blue-dark size-8 rounded-full bg-linear-to-br from-30% to-80%"
+        ></span>
+      </span>
 
+      <span
+        (click)="setColorScheme('mix1')"
+        [attr.aria-checked]="selectedColorScheme() === 'mix1'"
+        [ngClass]="{
+          'outline-2': selectedColorScheme() === 'mix1',
+        }"
+        class="outline-slack-blue-light/80 hover:outline-slack-blue-light/50 active:outline-slack-blue-light flex cursor-pointer rounded-full p-0.5 hover:outline-2 active:outline-2"
+        role="radio"
+      >
         <span
-          (click)="setColorScheme('mix1')"
-          [attr.aria-checked]="selectedColorScheme() === 'mix1'"
-          [ngClass]="{
-            'outline-2': selectedColorScheme() === 'mix1',
-          }"
-          class="outline-slack-blue-light/80 hover:outline-slack-blue-light/50 active:outline-slack-blue-light flex cursor-pointer rounded-full p-0.5 hover:outline-2 active:outline-2"
-          role="radio"
-        >
-          <span
-            aria-hidden="true"
-            class="from-slack-yellow to-slack-white size-8 rounded-full bg-linear-to-r from-45% to-55%"
-          ></span>
-        </span>
+          aria-hidden="true"
+          class="from-slack-yellow to-slack-white size-8 rounded-full bg-linear-to-r from-45% to-55%"
+        ></span>
+      </span>
 
+      <span
+        (click)="setColorScheme('mix2')"
+        [attr.aria-checked]="selectedColorScheme() === 'mix2'"
+        [ngClass]="{
+          'outline-2': selectedColorScheme() === 'mix2',
+        }"
+        class="outline-slack-yellow/80 hover:outline-slack-yellow/50 active:outline-slack-yellow flex cursor-pointer rounded-full p-0.5 hover:outline-2 active:outline-2"
+        role="radio"
+      >
         <span
-          (click)="setColorScheme('mix2')"
-          [attr.aria-checked]="selectedColorScheme() === 'mix2'"
-          [ngClass]="{
-            'outline-2': selectedColorScheme() === 'mix2',
-          }"
-          class="outline-slack-yellow/80 hover:outline-slack-yellow/50 active:outline-slack-yellow flex cursor-pointer rounded-full p-0.5 hover:outline-2 active:outline-2"
-          role="radio"
-        >
-          <span
-            aria-hidden="true"
-            class="from-slack-yellow to-slack-white size-8 rounded-full bg-linear-to-l from-45% to-55%"
-          ></span>
-        </span>
-      </div>
+          aria-hidden="true"
+          class="from-slack-yellow to-slack-white size-8 rounded-full bg-linear-to-l from-45% to-55%"
+        ></span>
+      </span>
     </div>
+  </div>
 
-    <div
-      (click)="copy()"
-      class="flex w-xl cursor-copy flex-row flex-wrap justify-center"
-      tabindex="0"
-    >
-      @for (mappedCharacter of outputIcons(); track $index) {
-        @for (icon of mappedCharacter.icons; track $index) {
-          <img
-            [ngSrc]="`icons/${icon}.png`"
-            [alt]="icon"
-            [title]="icon"
-            width="32"
-            height="32"
-            class="-mr-1"
-          />
-        } @empty {
-          @if (mappedCharacter.character === " ") {
-            <div class="size-3"></div>
-          }
+  <div
+    (click)="copy()"
+    class="flex w-sm cursor-copy flex-row flex-wrap self-center"
+    tabindex="0"
+  >
+    @for (mappedCharacter of outputIcons(); track $index) {
+      @for (icon of mappedCharacter.icons; track $index) {
+        <img
+          [ngSrc]="`icons/${icon}.png`"
+          [alt]="icon"
+          [title]="icon"
+          width="32"
+          height="32"
+          class="-mr-1"
+        />
+      } @empty {
+        @if (mappedCharacter.character === " ") {
+          <div class="size-3"></div>
         }
       }
-    </div>
+    }
   </div>
 </div>
