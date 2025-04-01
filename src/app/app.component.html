@@ -1,1 +1,13 @@
-<h1 class="p-4 text-3xl font-bold underline">Hello world!</h1>
+<div class="flex h-[100vh] w-full items-center justify-center">
+  <div class="flex flex-col">
+    <textarea
+      [(ngModel)]="inputText"
+      class="w-96 bg-red-50"
+      placeholder="Type some text here"
+    ></textarea>
+
+    <p class="w-96">
+      {{ outputText() }}
+    </p>
+  </div>
+</div>
