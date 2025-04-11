@@ -11,7 +11,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-brokenkit/build-angular:application",
           "options": {
             "outputPath": "dist/slack-text",
             "index": "src/index.html",
