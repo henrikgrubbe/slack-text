@@ -24,7 +24,7 @@
     "@angular/cli": "20.0.3",
     "@angular/compiler-cli": "20.0.4",
     "@tailwindcss/postcss": "4.1.10",
-    "angular-eslint": "20.1.0",
+    "angular-eslint": "20.1.1",
     "eslint": "9.29.0",
     "eslint-config-prettier": "10.1.5",
     "eslint-plugin-prettier": "5.5.0",
