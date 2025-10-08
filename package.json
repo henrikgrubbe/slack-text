@@ -20,8 +20,8 @@
     "tslib": "2.8.1"
   },
   "devDependencies": {
-    "@angular/build": "20.3.4",
-    "@angular/cli": "20.3.4",
+    "@angular/build": "20.3.5",
+    "@angular/cli": "20.3.5",
     "@angular/compiler-cli": "20.3.4",
     "@tailwindcss/postcss": "4.1.14",
     "angular-eslint": "20.3.0",
