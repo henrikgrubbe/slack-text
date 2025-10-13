@@ -13,9 +13,7 @@
       <span
         (click)="setColorScheme('yellow')"
         [attr.aria-checked]="selectedColorScheme() === 'yellow'"
-        [ngClass]="{
-          'outline-2': selectedColorScheme() === 'yellow',
-        }"
+        [class.outline-2]="selectedColorScheme() === 'yellow'"
         class="outline-slack-blue-light/80 hover:outline-slack-blue-light/50 active:outline-slack-blue-light flex cursor-pointer rounded-full p-0.5 hover:outline-2 active:outline-2"
         role="radio"
       >
@@ -28,9 +26,7 @@
       <span
         (click)="setColorScheme('white')"
         [attr.aria-checked]="selectedColorScheme() === 'white'"
-        [ngClass]="{
-          'outline-2': selectedColorScheme() === 'white',
-        }"
+        [class.outline-2]="selectedColorScheme() === 'white'"
         class="outline-slack-yellow/80 hover:outline-slack-yellow/50 active:outline-slack-yellow flex cursor-pointer rounded-full p-0.5 hover:outline-2 active:outline-2"
         role="radio"
       >
@@ -43,9 +39,7 @@
       <span
         (click)="setColorScheme('mix1')"
         [attr.aria-checked]="selectedColorScheme() === 'mix1'"
-        [ngClass]="{
-          'outline-2': selectedColorScheme() === 'mix1',
-        }"
+        [class.outline-2]="selectedColorScheme() === 'mix1'"
         class="outline-slack-blue-light/80 hover:outline-slack-blue-light/50 active:outline-slack-blue-light flex cursor-pointer rounded-full p-0.5 hover:outline-2 active:outline-2"
         role="radio"
       >
@@ -58,9 +52,7 @@
       <span
         (click)="setColorScheme('mix2')"
         [attr.aria-checked]="selectedColorScheme() === 'mix2'"
-        [ngClass]="{
-          'outline-2': selectedColorScheme() === 'mix2',
-        }"
+        [class.outline-2]="selectedColorScheme() === 'mix2'"
         class="outline-slack-yellow/80 hover:outline-slack-yellow/50 active:outline-slack-yellow flex cursor-pointer rounded-full p-0.5 hover:outline-2 active:outline-2"
         role="radio"
       >

@@ -1,6 +1,11 @@
-import { Component, computed, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgClass, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 
 type ColorScheme = 'yellow' | 'white' | 'mix1' | 'mix2';
 type Color = 'yellow' | 'white';
@@ -13,7 +18,8 @@ interface MappedCharacter {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  imports: [FormsModule, NgOptimizedImage, NgClass],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [FormsModule, NgOptimizedImage],
 })
 export class AppComponent {
   protected readonly COLOR_SCHEMES: Record<ColorScheme, { colors: Color[] }> = {
