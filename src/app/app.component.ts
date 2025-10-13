@@ -1,4 +1,9 @@
-import { Component, computed, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgClass, NgOptimizedImage } from '@angular/common';
 
@@ -13,6 +18,7 @@ interface MappedCharacter {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [FormsModule, NgOptimizedImage, NgClass],
 })
 export class AppComponent {
